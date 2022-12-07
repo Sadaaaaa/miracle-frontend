@@ -1,0 +1,13 @@
+.new-ad {
+    width: 150px;
+    border: 0px;
+    cursor: pointer;
+    background-color: rgb(113, 188, 113);
+    border-radius: 0.5rem;
+    height: 35px;
+    font-size: 17px;
+}
+
+.new-ad:hover {
+    background-color: lightgreen;
+}

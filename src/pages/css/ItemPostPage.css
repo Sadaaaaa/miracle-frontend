@@ -1,0 +1,97 @@
+.title__item-page {
+    width: 1000px;
+    margin: 50px auto;
+    text-align: center;
+    font-size: 50px;
+}
+
+.item__block {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.title {
+    margin-bottom: 30px;
+}
+
+.item__title-label {
+    margin-right: 20px;
+    font-size: 25px;
+}
+
+.item__title-input {
+    height: 25px;
+    width: 500px;
+    border-radius: 3px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.description {
+    display: flex;
+    margin-bottom: 30px;
+    margin-left: 4px;
+}
+
+.item__description-label {
+    margin-right: 20px;
+    font-size: 25px;
+}
+
+.item__description-input {
+    height: 250px;
+    width: 500px;
+    resize: none;
+    border-radius: 3px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.item__price-label {
+    font-size: 20px;
+    margin-left: 40px;
+    margin-right: 20px;
+}
+
+.item__price-input {
+    width: 100px;
+    border-radius: 3px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.item_photos {
+    max-width: 8em;
+    min-height: 2em;
+    margin-left: auto;
+    margin-right: 9.5em;
+}
+
+.item__input-file {
+    margin-bottom: 30px;
+}
+
+.item__submit {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.item__submit-button {
+    margin: 25px;
+    width: 200px;
+    height: 35px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: rgb(113, 188, 113);
+    font-size: 17px;
+}
+
+.item__submit-button:hover {
+    background-color: lightgreen;
+}

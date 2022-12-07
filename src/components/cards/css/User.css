@@ -1,0 +1,23 @@
+.card-container {
+    margin-left: 50px;
+    margin-top: 50px;
+    display: flex;
+}
+
+.user-photo {
+    object-fit: cover;
+    width: 500px;
+    height: 500px;
+}
+
+.profile-header{
+    margin: 0 auto;
+}
+
+.user-name {
+    text-decoration: underline;
+}
+
+.user-email {
+    
+}

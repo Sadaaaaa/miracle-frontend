@@ -2,9 +2,11 @@
   "name": "miracle-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8090",
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+    "@reduxjs/toolkit": "^1.9.0",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -14,6 +16,7 @@
     "babel-loader": "^8.2.3",
     "babel-plugin-named-asset-import": "^0.3.8",
     "babel-preset-react-app": "^10.0.1",
+    "base-64": "^1.0.0",
     "bfj": "^7.0.2",
     "browserslist": "^4.18.1",
     "camelcase": "^6.2.1",
@@ -33,6 +36,8 @@
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "mini-css-extract-plugin": "^2.4.5",
+    "mobx": "^6.7.0",
+    "mobx-react-lite": "^3.4.0",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",
@@ -43,7 +48,12 @@
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
+    "react-error-boundary": "^3.1.4",
+    "react-redux": "^8.0.5",
     "react-refresh": "^0.11.0",
+    "react-router-dom": "^6.4.3",
+    "redux": "^4.2.0",
+    "redux-logger": "^3.0.6",
     "resolve": "^1.20.0",
     "resolve-url-loader": "^4.0.0",
     "sass-loader": "^12.3.0",
@@ -61,6 +71,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "start:prod": "pushstate-server build",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
@@ -137,5 +148,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@redux-devtools/core": "^3.13.1"
   }
 }

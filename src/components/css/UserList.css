@@ -1,0 +1,20 @@
+
+.wrapper {
+    display: flex;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0px;
+}
+
+
+.id {
+    width: 50px;
+}
+
+.username {
+    width: calc(1000px - 20px - 300px);
+}
+
+.email {
+    width: 100px;
+} 

@@ -1,0 +1,17 @@
+.wrapper__item-list {
+    width: 1000px;
+    display: flex;
+    margin: 0 auto;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.no_items {
+    margin-top: 100px;
+    display: flex;
+}
+
+.no_items_text {
+
+    margin: 0 auto;
+}

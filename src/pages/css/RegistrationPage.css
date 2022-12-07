@@ -1,0 +1,95 @@
+.form__registration {
+    width: 1000px;
+    margin: 0 auto;
+    font-size: 30px;
+}
+
+.title__registration {
+    text-align: center;
+}
+
+.messages__registration {
+    text-align: center;
+}
+
+.inputs_registration {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 300px;
+}
+
+.registration_btn {
+    width: 200px;
+    height: 35px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: rgb(113, 188, 113);
+    font-size: 17px;
+    margin-right: 65px;
+}
+
+.registration_btn:hover {
+    background-color: lightgreen;
+}
+
+.name_registration {
+    margin-bottom: 20px;
+}
+
+.name_label {
+    margin-right: 25px;
+    font-size: 30px;
+}
+
+.name_input {
+    height: 25px;
+    width: 300px;
+    border-radius: 3px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.email_registration {
+    margin-bottom: 20px;
+}
+
+.email_label {
+    margin-right: 25px;
+    font-size: 30px;
+}
+
+.email_input {
+    height: 25px;
+    width: 300px;
+    border-radius: 3px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.password_registration {
+    margin-bottom: 20px;
+}
+
+.password_label {
+    margin-right: 25px;
+    font-size: 30px;
+}
+
+.password_input {
+    height: 25px;
+    width: 300px;
+    border-radius: 3px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.photo_registration {
+    width: 290px;
+    align-self: end;
+    font-size: 20px;
+    margin-bottom: 20px;
+}

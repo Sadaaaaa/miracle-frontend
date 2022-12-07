@@ -1,0 +1,30 @@
+.wrapper__items {
+    display: flex;
+    justify-content: space-between;
+    width: 1000px;
+    margin: 20px auto;
+}
+
+.id__items {
+    width: 70px;
+}
+
+.title__items {
+    width: 100px;
+}
+
+.description__items {
+    width: 100px;
+}
+
+.price__items {
+    width: 100px;
+}
+
+.owner__items {
+    width: 100px;
+}
+
+.posted__items {
+    width: 100px;
+}
