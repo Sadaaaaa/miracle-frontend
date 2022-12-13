@@ -1,12 +1,12 @@
-import api from "./index.js";
-import { AxiosResponse } from 'axios';
+import api from "../api/index.js";
 import axios from "axios";
+import { API_URL } from "../api/index.js";
 
 export default class AuthServices {
 
     // Create LOGIN request
     static async login(username, password) {
-        return api.post('/login', { username, password })
+        return api.post(API_URL + '/login', { username, password })
     }
 
     // Create REGISTER request
@@ -27,13 +27,13 @@ export default class AuthServices {
             formData.append('user', JSON.stringify(user));
 
         }
-
-        return axios.post('/registration', formData, { 'Content-Type': 'multipart/form-data' });
+        
+        return api.post(API_URL + '/registration', formData, { 'Content-Type': 'multipart/form-data' });
     };
 
     // Create LOGOUT request
     static async logout() {
-        return api.post('/logout')
+        return api.post(API_URL + '/logout')
     }
 
 }

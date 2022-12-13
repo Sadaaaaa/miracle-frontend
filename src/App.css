@@ -3,18 +3,28 @@
 }
 
 .header_app {
-    margin: auto 50px;
     height: 3.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+.link-to-start__wrapper {
+    display: flex;
+}
+
+.link-to-start {
+    width: 50px;
+}
+
 .reg__link {
+    min-width: 60px;
     text-decoration: none;
     cursor: pointer;
     color: black;
-    margin-left: 20px;
+    margin: auto;
+    text-align: center;
+    margin-right: 60px;
 }
 
 .reg__link:hover {
@@ -34,15 +44,104 @@
     align-items: baseline;
 }
 
+
+
+.tg__link:hover {
+    color: red;
+}
+
+
+.drop-menu {
+    text-align: center;
+    cursor: pointer;
+}
+
+.open {
+    display: block;
+}
+
+.closed {
+    display: none;
+}
+
+.nav {
+    min-width: 60px;
+    height: 3.5rem;
+    display: flex;
+}
+
+.drop-menu__list {
+    background-color: rgb(250, 250, 250);
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.drop-menu__username {
+    line-height: 3.5rem;
+    height: 3.5rem;
+    margin-right: 50px;
+    width: 200px;
+    margin-right: 0px;
+}
+
+.drop-menu {
+    margin: auto;
+}
+
+.drop-menu__link-user {
+    margin-top: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+
+.drop-menu__link-user:hover {
+    color: red;
+}
+
+.drop-menu__link-logout {
+    margin-top: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+
+.drop-menu__link-logout:hover {
+    color: red;
+}
+
+.link-to-start {
+    display: block;
+    width: 200px;
+    height: 35px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.link-to-start-text {
+    color: black;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.add-new-ad {
+    margin: auto 0;
+    margin-right: 130px;
+}
+
 .tg__link {
     text-decoration: none;
     cursor: pointer;
     color: black;
     font-size: 10px;
     margin-left: auto;
-    margin-right: 50px;
+    margin-right: 10px;
 }
 
-.tg__link:hover {
-    color: red;
+.version {
+    font-size: 10px;
+    margin-right: 50px;
 }

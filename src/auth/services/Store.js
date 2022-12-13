@@ -1,6 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import AuthServices from "./AuthServices";
 import axios from 'axios';
+import { API_URL } from "../api";
+import api from "../api";
+
 
 export default class Store {
 
@@ -67,13 +70,14 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
-            console.log("СУКА БЛЯТЬ!!!")
             const sukaBlyatEbychiiToken = localStorage.getItem('refresh');
-            const refreshToken = {'refreshToken': sukaBlyatEbychiiToken};            
-            const response = await axios.post(`token`, refreshToken);
-            // console.log(response);
-            // console.log(response.data.accessToken);
+            
+            const refreshToken = {'refreshToken': sukaBlyatEbychiiToken}; 
+          
+            const response = await api.post(API_URL + `/token`, refreshToken);
+
             localStorage.setItem('token', response.data.accessToken);
+
             this.setAuth(true);
             this.setUser(response.data.userDto);
         } catch (e) {

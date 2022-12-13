@@ -1,12 +1,11 @@
-import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import './css/RegistrationPage.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
 import AuthService from '../auth/services/AuthService';
 import { Context } from "../index";
+import './css/RegistrationPage.css';
+import { API_URL } from '../auth/api';
 
 function RegistrationPage() {
-    const navigate = useNavigate();
     const [picture, setPicture] = useState("");
     const { context } = useContext(Context);
     const [user, setUser] = useState({
@@ -56,11 +55,8 @@ function RegistrationPage() {
         try {
             await AuthService.register(user.username, user.email, user.password, picture).then(
                 (response) => {
-                    // check for token and user already exists with 200
                     console.log("Sign up successfully", response.data);
                     localStorage.setItem("token", response.data.token);
-                    //   navigate("/");
-                    //   window.location.reload();
                 },
                 (error) => {
                     console.log(error);
@@ -87,7 +83,7 @@ function RegistrationPage() {
 
             axios({
                 method: "POST",
-                url: "/registration/",
+                url: API_URL + "/registration/",
                 data: formData,
                 headers: { 'Content-Type': 'multipart/form-data' }
             })

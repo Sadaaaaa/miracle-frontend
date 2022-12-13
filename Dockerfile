@@ -6,10 +6,10 @@
 # CMD ["npm", "start"]
 
 
-FROM node:alpine
-WORKDIR /app
-COPY package.json /app/
+FROM --platform=linux/amd64 node:alpine
+WORKDIR /app/front
+COPY package.json ./
 RUN npm install
-COPY ./ ./
+COPY . .
 EXPOSE 3000
 CMD ["npm", "start"]

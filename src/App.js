@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import StartPage from './pages/StartPage';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
@@ -7,48 +7,108 @@ import AdminUsers from './pages/AdminUsers';
 import ItemPostPage from './pages/ItemPostPage';
 import ItemListPage from './pages/ItemListPage';
 import Item from './components/cards/Item';
-import Test from './components/cards/Test';
 import { Link } from 'react-router-dom';
 import NewAdBtn from './components/ui/newAdBtn';
 import './App.css';
 
-
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { Context } from "./index";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from 'react-router-dom';
 
 function App() {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   const { context } = useContext(Context);
 
+  // refresh access token
+  useEffect(() => {
+    if (localStorage.getItem("refresh")) {
+      context.checkAuth();
+    }
+  }, [])
+
+  // hide dropdown menu by clicking outside
+  const ref = useRef();
+
+  // useEffect(() => {
+  //   console.log(ref.current)
+  //   const handleClickOutside = (event) => {
+  //     if (!ref?.current?.contains(event.target)) {
+  //       setOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handleClickOutside);
+  // }, [ref]);
+
+  useEffect(() => {
+    const closeOpenMenus = (e) => {
+      if (ref.current && open && !ref.current.contains(e.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', closeOpenMenus);
+  })
+
+
   if (context.isLoading) {
-    return <div>Загрузка...</div>
+    return <div>Loading...</div>
   }
 
-  const handleHandle = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
+    handleDropMenu(e);
     context.logout();
     navigate("/");
   }
+
+  const handleDropMenu = (e) => {
+    e.preventDefault();
+    if (open === false) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }
+
 
   return (
     <div className="react-root">
       <div className="wrap_head">
         <header className='header_app'>
-          <NewAdBtn />
-          <div className='nav'>
-            <Link className="reg__link" to={'/login'} >Login</Link>
-            <Link className="reg__link" to={'/registration'} >Registration</Link>
-            <Link className="reg__link" onClick={handleHandle}>Logout</Link>
+          <div className='link-to-start__wrapper'>
+            <div className="link-to-start"><Link className='link-to-start-text' to={'/'} >Miracle</Link></div>
           </div>
-          {/* <p className="email_sign" hidden={context.userDto.email === ''}>{context.userDto.email}</p> */}
+          <div className='nav'>
+            {context.isAuth && <div className="add-new-ad">
+              <NewAdBtn />
+            </div>
+            }
+            {!context.isAuth && window.location.pathname !== '/login' && (
+              <Link className="reg__link" to={'/login'} >Login</Link>
+            )}
+            {window.location.pathname === '/login' && (
+              <Link className="reg__link" to={'/registration'} >Registration</Link>
+            )}
+            {context.isAuth && (
+              <div className="drop-menu">
+                <div className="drop-menu__username" onClick={handleDropMenu}>{context.userDto?.username} 	&#8744;</div>
+                <div className={`${open ? 'open' : 'closed'}`} ref={ref}>
+                  <div className="drop-menu__list">
+                    <Link className="drop-menu__link-user" to={`/user/${context.userDto?.id}`}>Profile</Link>
+                    <Link className="drop-menu__link-logout" onClick={handleLogout}>Logout</Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </header>
       </div>
 
       <div className="wrap_foot">
         <footer className='footer_app'>
           <a target="_blank" className="tg__link" href="https://t.me/sadopwnz">@sadopwnz</a>
+          <span className="version">v.0.0.2</span> 
         </footer>
       </div>
 
@@ -61,7 +121,6 @@ function App() {
         <Route path='/item' element={<ItemPostPage />} />
         <Route path='/items' element={<ItemListPage />} />
         <Route path='/item/:id' element={<Item />} />
-        <Route path='/test' element={<Test />} />
       </Routes>
     </div>
   );

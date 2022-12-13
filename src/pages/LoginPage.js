@@ -1,12 +1,11 @@
-import './css/LoginPage.css'
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../auth/services/AuthService';
-import { useDispatch } from 'react-redux';
-import { addCredentials } from '../store/reducers/authentication';
 import { Context } from "../index";
-import { Redirect } from 'react-router';
+import { addCredentials } from '../store/reducers/authentication';
+import './css/LoginPage.css';
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -75,7 +74,7 @@ function LoginPage() {
       <form className="login-page__inputs">
 
         <div className='login-page__log'>
-          <label className="login-page__log-label" htmlFor="login">Login</label>
+          <label className="login-page__log-label" htmlFor="login">Email</label>
           <input className='login-page__log-input' type="text" id='login' value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
 

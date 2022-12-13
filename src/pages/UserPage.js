@@ -3,23 +3,23 @@ import { useSelector } from 'react-redux';
 import axios from "axios";
 import User from '../components/cards/User'
 import authHeader from '../auth/services/AuthHeader';
+import { API_URL } from '../auth/api';
 
-export default function UserPage(props) {
-    const SERVER_URL = "http://localhost:8090"
+export default function UserPage() {
     const selector = useSelector(state => state.user);
-
     const [appState, setAppState] = useState();
 
 
-    useEffect(() => {
-        const apiUrl = SERVER_URL + "/user/" + selector.userId;
-        axios.get(apiUrl, {
-            headers: authHeader()
-        }).then((resp) => {
-            const allPersons = resp.data;
-            setAppState(allPersons);
-        });
-    }, [setAppState]);
+    // useEffect(() => {
+    //     axios.get(API_URL + `/user/${selector.userId}`, {
+    //         headers: authHeader()
+    //     }).then((resp) => {
+    //         const allPersons = resp.data;
+    //         setAppState(allPersons);
+    //     });
+    // }, [setAppState]);
+
+    // console.log(appState)
 
     return (
         <div>

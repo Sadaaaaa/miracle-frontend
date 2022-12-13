@@ -1,10 +1,8 @@
-import { Dispatch } from "@reduxjs/toolkit"
 import api from "../auth/api"
-import { loginStart, loginSucess, loginFailure, logoutSuccess,loadProfileStart, loadProfileFailure, loadProfileSucess } from "./reducers/authReducer"
-import { history } from '../auth/utils/history'
 import { store } from "../auth/store"
-import { AxiosPromise } from "axios"
+import { history } from '../auth/utils/history'
 import { isTokenExpired } from "../auth/utils/jwt"
+import { loadProfileFailure, loadProfileStart, loadProfileSucess, loginFailure, loginStart, loginSucess, logoutSuccess } from "./reducers/authReducer"
 
 export const loginUser =
   (data) =>

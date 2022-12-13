@@ -1,7 +1,5 @@
 import './css/ItemList.css';
 import { Link } from 'react-router-dom';
-import { Context } from '../index';
-import { useContext, useEffect, useState } from 'react';
 
 
 function ItemList(props) {
@@ -11,15 +9,19 @@ function ItemList(props) {
     }
 
     return (
-        <div className="container">
+        <div className="container__items">
             <Link to={"/" + `item/${props.id}`}>
                 <div className="wrapper__items">
-                    <div className='id__items'>{props.id}</div>
-                    <div className='title__items'>{props.title}</div>
-                    <div className='description__items'>{props.description}</div>
-                    <div className='price__items'>{props.price}</div>
-                    <div className='owner__items'>{user}</div>
-                    <div className='posted__items'>{props.posted}</div>
+                    <img src={"data:image/png;base64," + props.img[0].bytes} alt={props.image} className="img__items" />
+
+                    <div className="items__text">
+                        <div className='title__items'>{props.title}</div>
+                        <div className='description__items'>{props.description}</div>
+                    </div>
+                    <div className="items__owner">
+                        <div className='price__items'>{props.price}</div>
+                        <div className='owner__items'>{props.owner?.username}</div>
+                    </div>
                 </div>
             </Link>
         </div>

@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './css/Item.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import authHeader from '../../auth/services/AuthHeader';
-import api from '../../auth/services';
-import { Context } from '../../index';
+import { API_URL } from '../../auth/api';
+import Carousel from '../ui/Carousel';
+import { Link } from 'react-router-dom';
 
 function Item() {
     const [item, setItem] = useState([]);
@@ -14,7 +14,7 @@ function Item() {
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(images, {
+        axios.get(API_URL + images, {
             headers: {
                 Authorization: "Bearer " + token
             }
@@ -26,7 +26,7 @@ function Item() {
     }, [])
 
     useEffect(() => {
-        api.get(`/item/${params.id}`, {
+        axios.get(API_URL + `/item/${params.id}`, {
             headers: {
                 Authorization: "Bearer " + token
             }
@@ -45,18 +45,41 @@ function Item() {
         <div className="item-container">
             <div className="wrapper__item">
                 <div className="item-image">
-                    <img className="user-photo" src={"data:image/png;base64," + pictures[0].bytes} alt={item.id} />
+                    <Carousel>
+                        {
+                            pictures?.map(i => {
+
+                                return <img key={i.id} src={"data:image/png;base64," + i.bytes} alt="placeholder" />
+                            })
+                        }
+                    </Carousel>
                 </div>
 
-                <div className="item-block">
-                    <h1 className="item-title">
-                        {item.title}
-                    </h1>
+                <div className="wrapper__descr">
+                    <div className="item-block">
+                        <h1 className="item-title">
+                            {item.title}
+                        </h1>
 
-                    <h2 className="item-description">
-                        {item.description}
-                    </h2>
+                        <div className="item-block-item">
+                            <div className="item-price">
+                                Price: {item.price}
+                            </div>
+
+                            <div className="item-username">
+                                Owner: 
+                                <Link className="item-username-owner" to={`/user/${item.owner?.id}`} >{item.owner?.username}, {item.owner?.email}</Link>
+                            </div>
+                        </div>
+
+                        <div className="item-description">
+                            {item.description}
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
+
             </div>
         </div>
     );

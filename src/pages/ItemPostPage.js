@@ -1,16 +1,21 @@
 import './css/ItemPostPage.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import authHeader from '../auth/services/AuthHeader';
+import { Context } from "../index";
+import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../auth/api';
 
 function ItemPostPage() {
+    const navigate = useNavigate();
     const [pictures, setPictures] = useState([]);
+    const { context } = useContext(Context);
     const [item, setItem] = useState({
         id: '',
         title: '',
         description: '',
         price: '',
-        owner: 1,
+        owner: context.userDto.id,
         posted: null
     });
 
@@ -71,11 +76,10 @@ function ItemPostPage() {
         // console.log(formData.getAll('files'));
 
         let jwtHeader = authHeader().Authorization;
-        console.log(jwtHeader);
 
         axios({
             method: "POST",
-            url: "http://localhost:8090" + "/item/",
+            url: API_URL + "/item/",
             data: formData,
             headers:
             {
@@ -85,14 +89,15 @@ function ItemPostPage() {
         })
             .then(res => {
                 if (res.data === true) {
-                    window.location.href = "http://localhost:8090" + "/auth"
+                    window.location.href = API_URL + "/auth"
                 }
+                navigate("/item/" + res.data.id);
             })
             .catch(() => {
                 alert("An error occurred on the server")
             })
 
-        // console.log(pictures);
+
     };
 
 

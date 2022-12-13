@@ -24,8 +24,23 @@
     text-align: center;
 }
 
-.item-description {
-    width: 700px;
-    margin: 10px auto;
+.wrapper__descr {
+
 }
 
+.item-block-item {
+    /* width: 50vh; */
+    text-align: center;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+
+.item-description {
+    width: 50vh;
+    margin: 50px 50px;
+}
+
+.item-username-owner {
+    margin-left: 10px;
+}

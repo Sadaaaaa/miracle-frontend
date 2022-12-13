@@ -1,4 +1,3 @@
-
 .searchline {
     margin-top: 100px;
     width: 850px;
@@ -43,3 +42,30 @@
     background-color: lightgreen;
 }
 
+.clear_searchline_btn {
+    cursor: pointer;
+    width: 40px;
+    margin-top: 22px;
+}
+
+.clear_searchline_btn:before,
+.clear_searchline_btn:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background: rgb(0, 0, 0);
+}
+
+.clear_searchline_btn:hover {
+    opacity: 0.3;
+    transition: opacity .15s ease-out;
+  }
+
+.clear_searchline_btn:before {
+    transform: rotate(45deg);
+}
+
+.clear_searchline_btn:after {
+    transform: rotate(-45deg);
+}

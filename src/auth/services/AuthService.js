@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:8090/";
+import { API_URL } from "../api";
 
 const register = (username, email, password, picture) => {
     let formData = new FormData();
@@ -20,11 +19,11 @@ const register = (username, email, password, picture) => {
 
     }
 
-    return axios.post(API_URL + "registration", formData, { 'Content-Type': 'multipart/form-data' });
+    return axios.post(API_URL + "/registration", formData, { 'Content-Type': 'multipart/form-data' });
 };
 
 const login = (username, password) => {
-    return axios.post(API_URL + "login", { username, password });
+    return axios.post(API_URL + "/login", { username, password });
         // .then((response) => {
         //     if (response.data) {
         //         localStorage.setItem("user", JSON.stringify(response.data));
@@ -36,7 +35,7 @@ const login = (username, password) => {
 
 const logout = () => {
     localStorage.removeItem("user");
-    return axios.post(API_URL + "signout").then((response) => {
+    return axios.post(API_URL + "/signout").then((response) => {
         return response.data;
     });
 };
