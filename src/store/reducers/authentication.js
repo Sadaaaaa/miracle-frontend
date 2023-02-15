@@ -5,15 +5,19 @@ const authSlice = createSlice({
 
     initialState: {
         token: '',
-        user: {}
+        user: {}, 
+        isAuth: false
     },
 
     reducers: {
         addCredentials(state, action) {
             state.token = action.payload.token;
-            state.user = JSON.parse(action.payload.user);
+            state.user = action.payload.user;
+            state.isAuth = action.payload.isAuth;
 
             console.log(state.token);
+            console.log(state.user);
+            console.log(state.isAuth);
         },
     }
 

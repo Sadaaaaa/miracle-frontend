@@ -1,6 +1,5 @@
-import './css/ItemList.css';
 import { Link } from 'react-router-dom';
-
+import './css/ItemList.css';
 
 function ItemList(props) {
     let user = '';
@@ -8,11 +7,12 @@ function ItemList(props) {
         user = props.owner.id;
     }
 
+
     return (
         <div className="container__items">
             <Link to={"/" + `item/${props.id}`}>
                 <div className="wrapper__items">
-                    <img src={"data:image/png;base64," + props.img[0].bytes} alt={props.image} className="img__items" />
+                    <img src={"data:image/png;base64," + props.img[0]?.bytes} alt={props.image} className="img__items" />
 
                     <div className="items__text">
                         <div className='title__items'>{props.title}</div>

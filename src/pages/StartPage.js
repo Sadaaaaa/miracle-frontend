@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { addItemSearch } from '../store/reducers/item';
 import './css/StartPage.css';
-import ItemListPage from './ItemListPage.js';
 
 function StartPage() {
     const [input, setInput] = useState('');
@@ -17,15 +16,13 @@ function StartPage() {
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        console.log(input);
         e.preventDefault();
         if (input !== '') {
-            navigate('/items');
             dispatch(addItemSearch(input));
         } else {
             dispatch(addItemSearch(input));
-            navigate('/items');
         }
+        navigate('/items');
     }
 
     const handleKeyDown = (e) => {
@@ -39,8 +36,6 @@ function StartPage() {
         setInput('');
         inputRef.current.value = "";
     }
-
-
 
     return (
         <div className="container">

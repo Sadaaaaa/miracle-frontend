@@ -1,42 +1,60 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../auth/services/AuthService';
-import { Context } from "../index";
 import { addCredentials } from '../store/reducers/authentication';
 import './css/LoginPage.css';
+import { useCookies } from 'react-cookie';
+import { API_URL } from '../auth/api';
 
 function LoginPage() {
+  const [cookies, setCookie] = useCookies(['user']);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [jwtToken, setjwtToken] = useState('');
   const [userDto, setUserDto] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { context } = useContext(Context);
+
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   axios.post(API_URL + "/login", { username, password })
+  //     .then(response => {
+  //       const tokenMap = new Map(Object.entries(response.data));
+  //       console.log(tokenMap);
+  //       const token = tokenMap.get("jwt");
+  //       console.log(token);
+  //       localStorage.setItem("JWT", token);
+  //       setjwtToken(token);
+
+  //     })
+  // }
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await AuthService.login(username, password).then(
         (response) => {
-          let tokenMap = new Map(Object.entries(response.data));
-          let token = tokenMap.get("jwt");
-          localStorage.setItem("token", token);
-          setjwtToken(tokenMap.get("jwt"))
+          const tokenMap = new Map(Object.entries(response.data));
+          const token = tokenMap.get("jwt");
+          localStorage.setItem("JWT", token);
+          setjwtToken(token);
 
           axios.get("http://localhost:8090/user?email=" + username, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           }).then((response) => {
-            setUserDto(JSON.stringify(response.data));
+            setCookie("user", JSON.stringify(response.data), { path: '/' });
+            setUserDto(response.data);
+            // localStorage.setItem("user", JSON.stringify(response.data));
+
           }).catch((err) => console.log("ERROR: " + err));
 
           navigate("/");
-          window.location.reload();
-
+          // window.location.reload();
         },
         (error) => {
           console.log(error);
@@ -52,17 +70,12 @@ function LoginPage() {
       dispatch(addCredentials(
         {
           token: jwtToken,
-          user: userDto
+          user: userDto,
+          isAuth: true
         }
       ));
     }
   }, [userDto])
-
-  const handleHandle = (e) => {
-    e.preventDefault();
-    context.login(username, password);
-    navigate("/");
-  }
 
   return (
     <div className='login-page__container'>
@@ -84,7 +97,7 @@ function LoginPage() {
         </div>
 
         <button className="login-page__btn" type="submit"
-          onClick={handleHandle}>Submit</button>
+          onClick={handleLogin}>Submit</button>
 
       </form>
 

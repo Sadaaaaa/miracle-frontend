@@ -20,6 +20,8 @@
 .user-photo {
     width: 300px;
     height: 300px;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 
 .item-card__user {

@@ -14,7 +14,57 @@
 }
 
 .link-to-start {
-    width: 50px;
+    display: block;
+    width: 120px;
+    height: 35px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.link-to-start-text {
+    color: black;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.logo {
+    height: 30px;
+    width: 30px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 50px;
+    top: 2px;
+}
+
+.logo:before {
+    content: "";
+    height: 150%;
+    width: 150%;
+    position: absolute;
+    background: conic-gradient(#fd004c,
+            #fe9000,
+            #fff020,
+            #3edf4b,
+            #3363ff,
+            #b102b7,
+            #fd004c);
+    left: -25%;
+    top: -25%;
+
+}
+
+.logo:after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    height: 65%;
+    width: 65%;
+    top: 18%;
+    left: 18%;
+    border-radius: 50%;
 }
 
 .reg__link {
@@ -109,22 +159,6 @@
 
 .drop-menu__link-logout:hover {
     color: red;
-}
-
-.link-to-start {
-    display: block;
-    width: 200px;
-    height: 35px;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-}
-
-.link-to-start-text {
-    color: black;
-    text-decoration: none;
-    vertical-align: middle;
 }
 
 .add-new-ad {

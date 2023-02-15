@@ -2,19 +2,21 @@ import { useEffect, useState } from 'react';
 import './css/Item.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { API_URL } from '../../auth/api';
 import Carousel from '../ui/Carousel';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../../auth/api';
 
 function Item() {
     const [item, setItem] = useState([]);
     const [pictures, setPictures] = useState([]);
     const params = useParams();
-    const images = "/image/item/" + params.id;
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('JWT');
+
+    console.log(token)
+    console.log("params: " + params.id);
 
     useEffect(() => {
-        axios.get(API_URL + images, {
+        axios.get(API_URL + "/image/item/" + params.id, {
             headers: {
                 Authorization: "Bearer " + token
             }
@@ -41,6 +43,8 @@ function Item() {
         return null;
     }
 
+    console.log(item.owner);
+
     return (
         <div className="item-container">
             <div className="wrapper__item">
@@ -48,7 +52,6 @@ function Item() {
                     <Carousel>
                         {
                             pictures?.map(i => {
-
                                 return <img key={i.id} src={"data:image/png;base64," + i.bytes} alt="placeholder" />
                             })
                         }
@@ -68,7 +71,9 @@ function Item() {
 
                             <div className="item-username">
                                 Owner: 
-                                <Link className="item-username-owner" to={`/user/${item.owner?.id}`} >{item.owner?.username}, {item.owner?.email}</Link>
+                                <Link className="item-username-owner" to={`/user/${item.owner}`} >
+                                    {item.owner?.username}, {item.owner?.email}
+                                    </Link>
                             </div>
                         </div>
 

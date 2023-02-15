@@ -1,21 +1,27 @@
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
+import { API_URL } from "../auth/api";
 import ItemList from "../components/ItemList";
-import './css/ItemListPage.css'
-import api from "../auth/api/index";
-import { API_URL } from "../auth/api/index";
+import './css/ItemListPage.css';
 
 function ItemListPage() {
     const search = useSelector(state => state.item.input);
     const [items, setItems] = useState([]);
 
+    const JWT = localStorage.getItem("token");
+
 
     useEffect(() => {
         if (search === 0) {
-            api.get(API_URL + "/items/all?from=" + 0 + "&size=" + 10)
-                .then(res => setItems(res.data.content));
+            axios.get(API_URL + "/items/all?from=" + 0 + "&size=" + 10, 
+)
+                .then(res => {
+                    setItems(res.data.content)
+                });
+                
         } else {
-            api.get(`/items/search?text=${search}&from=` + 0 + "&size=" + 10)
+            axios.get(API_URL + `/items/search?text=${search}&from=` + 0 + "&size=" + 10)
                 .then(res => {
                     setItems(res.data.content);
                 });
@@ -41,6 +47,7 @@ function ItemListPage() {
                     <ItemList key={item.id}
                         id={item.id}
                         img={item.imageItems}
+                        images={item.itemImage}
                         title={item.title}
                         description={item.description}
                         price={item.price}

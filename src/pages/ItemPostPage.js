@@ -1,22 +1,20 @@
-import './css/ItemPostPage.css';
-import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import authHeader from '../auth/services/AuthHeader';
-import { Context } from "../index";
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../auth/api';
+import authHeader from '../auth/services/AuthHeader';
+import './css/ItemPostPage.css';
+import { useCookies } from 'react-cookie';
 
 function ItemPostPage() {
     const navigate = useNavigate();
-    const [pictures, setPictures] = useState([]);
-    const { context } = useContext(Context);
+    const [cookies, setCookie, removeCookie] = useCookies();
     const [item, setItem] = useState({
         id: '',
         title: '',
         description: '',
         price: '',
-        owner: context.userDto.id,
-        posted: null
+        owner: cookies.user.id
     });
 
     let photos = [];
@@ -46,45 +44,44 @@ function ItemPostPage() {
         e.preventDefault();
         let id = e.target.id;
         photos[id] = e.target.files[0];
-
-
-        // setPictures([...pictures, file]);
-
-        // fileReader.onload = () => {
-        //     // setPictures([...pictures, { fileId: id, uploadedFile: fileReader.result }]);
-        //     setPictures([...pictures, fileReader.result]);
-        //     console.log(pictures)
-        // };
-
-        // fileReader.readAsDataURL(file);
-
-
     };
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+
+    //     let token = localStorage.getItem("JWT");
+
+    //     axios.post(API_URL + "/item/", {
+    //         headers:
+    //         {
+    //             Authorization: "Bearer " + token,
+    //             'Content-Type': 'multipart/form-data'
+    //         }
+    //     })
+    //         .then(response => {
+    //             console.log(response);
+    //         })
+
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         let formData = new FormData();
 
-        // console.log(photos);
-
         for (let i = 0; i < photos.length; i++) {
             formData.append('files', photos[i])
         }
         formData.append('item', JSON.stringify(item));
 
-        // console.log(formData.getAll('files'));
+        let token = localStorage.getItem("JWT");
+        // console.log(token);
 
-        let jwtHeader = authHeader().Authorization;
-
-        axios({
-            method: "POST",
-            url: API_URL + "/item/",
-            data: formData,
+        axios.post(API_URL + "/item/", formData, {
             headers:
             {
-                'Content-Type': 'multipart/form-data',
-                Authorization: jwtHeader
+                Authorization: "Bearer " + token,
+                'Content-Type': 'multipart/form-data'
             }
         })
             .then(res => {
@@ -96,14 +93,12 @@ function ItemPostPage() {
             .catch(() => {
                 alert("An error occurred on the server")
             })
-
-
     };
 
 
     return (
         <div className="container__post-item">
-            <h1 className='title__item-page'>Add new ad</h1>
+            <h1 className='title__item-page'>Post new ad</h1>
 
             <div className="item__block">
                 <div className="title">
