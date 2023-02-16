@@ -3,10 +3,12 @@ name: CI
 on:
   # runs on pushes to the main branch
   push:
-    branches: [master]
+    branches: 
+      - master
   # also runs inside pull requests that target the main branch
   pull_request:
-    branches: [master]
+    branches: 
+      - master
 
 jobs:
   build:
