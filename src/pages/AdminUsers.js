@@ -5,8 +5,6 @@ import UserList from "../components/UserList.js";
 import authHeader from "../auth/services/AuthHeader.js";
 
 function ListOfUsers() {
-    const SERVER_URL = "http://localhost:8090"
-    const input = useSelector(state => state.user.input);
     const [items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [fetching, setFetching] = useState(true);

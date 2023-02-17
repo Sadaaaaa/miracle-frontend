@@ -14,7 +14,7 @@ function RegistrationPage() {
 
     // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState(false);
+    const [error] = useState(false);
 
     // Handling the name change
     const handleName = (e) => {

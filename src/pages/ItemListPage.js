@@ -9,7 +9,7 @@ function ItemListPage() {
     const search = useSelector(state => state.item.input);
     const [items, setItems] = useState([]);
 
-    const JWT = localStorage.getItem("token");
+    // const JWT = localStorage.getItem("token");
 
 
     useEffect(() => {

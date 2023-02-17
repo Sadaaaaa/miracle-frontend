@@ -11,17 +11,16 @@ import Item from './components/cards/Item';
 import NewAdBtn from './components/ui/newAdBtn';
 import './App.css';
 import React, { useEffect, useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 
 
 function App() {
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, removeCookie] = useCookies();
   const [user, setUser] = useState();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [auth, setAuth] = useState(false);
-  const credentials = useSelector(state => state.authentication);
+  // const credentials = useSelector(state => state.authentication);
   let context;
 
   // if (cookies.user != null) {

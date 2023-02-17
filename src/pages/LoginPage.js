@@ -6,10 +6,9 @@ import AuthService from '../auth/services/AuthService';
 import { addCredentials } from '../store/reducers/authentication';
 import './css/LoginPage.css';
 import { useCookies } from 'react-cookie';
-import { API_URL } from '../auth/api';
 
 function LoginPage() {
-  const [cookies, setCookie] = useCookies(['user']);
+  const [setCookie] = useCookies(['user']);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

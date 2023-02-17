@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import User from '../components/cards/User';
 import { API_URL } from '../auth/api';
 import authHeader from '../auth/services/AuthHeader';

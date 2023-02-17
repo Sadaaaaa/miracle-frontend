@@ -2,13 +2,12 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../auth/api';
-import authHeader from '../auth/services/AuthHeader';
 import './css/ItemPostPage.css';
 import { useCookies } from 'react-cookie';
 
 function ItemPostPage() {
     const navigate = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies();
+    const [cookies] = useCookies();
     const [item, setItem] = useState({
         id: '',
         title: '',
