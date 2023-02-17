@@ -8,7 +8,7 @@ import './css/LoginPage.css';
 import { useCookies } from 'react-cookie';
 
 function LoginPage() {
-  const [setCookie] = useCookies(['user']);
+  const [cookie, setCookie] = useCookies(['user']);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,6 +38,7 @@ function LoginPage() {
         (response) => {
           const tokenMap = new Map(Object.entries(response.data));
           const token = tokenMap.get("jwt");
+
           localStorage.setItem("JWT", token);
           setjwtToken(token);
 

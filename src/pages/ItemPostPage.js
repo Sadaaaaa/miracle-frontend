@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie';
 
 function ItemPostPage() {
     const navigate = useNavigate();
-    const [cookies] = useCookies();
+    const [cookies, setCookies] = useCookies();
     const [item, setItem] = useState({
         id: '',
         title: '',

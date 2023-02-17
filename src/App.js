@@ -15,7 +15,7 @@ import { useCookies } from 'react-cookie';
 
 
 function App() {
-  const [cookies, removeCookie] = useCookies();
+  const [cookies, setCookies, removeCookie] = useCookies();
   const [user, setUser] = useState();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
