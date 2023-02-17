@@ -49,10 +49,10 @@ name: CI
 on:
   # runs on pushes to the main branch
   push:
-    branches: [main]
+    branches: [master]
   # also runs inside pull requests that target the main branch
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build:
