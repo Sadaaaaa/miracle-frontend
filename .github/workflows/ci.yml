@@ -69,7 +69,7 @@ jobs:
       # install dependencies
       - run: npm ci
       # verify that there are no build errors
-      - run: npm run build#       
+      - run: npm run build
       - name: Build the Docker image
         run: |
           echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
