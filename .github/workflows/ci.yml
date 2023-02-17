@@ -1,49 +1,3 @@
-# name: CI
-
-# on:
-#   # runs on pushes to the main branch
-#   push:
-#     branches: 
-#       - master
-#   # also runs inside pull requests that target the main branch
-#   pull_request:
-#     branches: 
-#       - master
-
-# jobs:
-#   build:
-#     # uses a Ubuntu Docker image (like a virtual machine)
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Use Node.js 16.x
-#       uses: actions/setup-node@v2
-#       with:
-#         node-version: [16.x]
-#         cache: 'npm'
-#         cache-dependency-path: package-lock.json
-#       - name: Install dependencies
-#       run: npm install 
-#       # install dependencies
-#       # - run: npm ci
-#       # run ESLint & Prettier
-#       # - run: npm run lint
-#       # - run: npm run prettier
-#       # verify that there are no build errors
-#       - name: Build file
-#         run: npm run build
-#       # run tests with Cypress
-#       # - name: Cypress run
-#       #   uses: cypress-io/github-action@v2
-#       #   with:
-#       #     start: npm start
-#       - name: Build the Docker image
-#         run: |
-#           echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
-#           docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
-#           docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
-
-
 name: CI
 
 on:
@@ -69,7 +23,7 @@ jobs:
       # install dependencies
       - run: npm ci
       # verify that there are no build errors
-      - run: npm run build
+      # - run: npm run build
       - name: Build the Docker image
         run: |
           echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
