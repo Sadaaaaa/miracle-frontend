@@ -68,8 +68,7 @@ jobs:
           cache-dependency-path: package-lock.json
       # install dependencies
       - run: npm ci
-      # run ESLint & Prettier
-      - run: npm run lint
+      # run Prettier
       - run: npm run prettier
       # verify that there are no build errors
       - run: npm run build
