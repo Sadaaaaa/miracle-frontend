@@ -6,6 +6,7 @@ import AuthService from '../auth/services/AuthService';
 import { addCredentials } from '../store/reducers/authentication';
 import './css/LoginPage.css';
 import { useCookies } from 'react-cookie';
+import { API_URL } from '../auth/api';
 
 function LoginPage() {
   const [cookie, setCookie] = useCookies(['user']);
@@ -42,10 +43,12 @@ function LoginPage() {
           localStorage.setItem("JWT", token);
           setjwtToken(token);
 
-          axios.get("http://localhost:8090/user?email=" + username, {
+          axios.get(`${API_URL}/user?email=` + username, {
             headers: {
               Authorization: `Bearer ${token}`
-            }
+            },
+            // withCredentials: true, 
+            // credentials: 'include'
           }).then((response) => {
             setCookie("user", JSON.stringify(response.data), { path: '/' });
             setUserDto(response.data);
