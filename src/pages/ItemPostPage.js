@@ -73,13 +73,12 @@ function ItemPostPage() {
         }
         formData.append('item', JSON.stringify(item));
 
-        let token = localStorage.getItem("JWT");
-        // console.log(token);
+        let accessJwt = localStorage.getItem("accessToken");
 
         axios.post(API_URL + "/item/", formData, {
             headers:
             {
-                Authorization: "Bearer " + token,
+                Authorization: "Bearer " + accessJwt,
                 'Content-Type': 'multipart/form-data'
             }
         })

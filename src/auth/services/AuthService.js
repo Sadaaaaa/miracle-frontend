@@ -15,15 +15,15 @@ const register = (username, email, password, picture) => {
         }
 
         formData.append('file', picture);
-        formData.append('user', JSON.stringify(user));
+            formData.append('user', JSON.stringify(user));
 
     }
 
     return axios.post(API_URL + "/registration", formData, { 'Content-Type': 'multipart/form-data' });
 };
 
-const login = (username, password) => {
-    return axios.post(API_URL + "/login", { username, password });
+const login = (email, password) => {
+    return axios.post(API_URL + "/login", { email, password });
 };
 
 const logout = () => {

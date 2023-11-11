@@ -11,20 +11,16 @@ function User() {
     const [items, setItems] = useState([]);
     const params = useParams();
 
-    const token = localStorage.getItem('JWT');
-
-    console.log(params.id)
+    const accessJwt = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const imagesPath = `/image/user/${params.id}`
         axios.get(API_URL + imagesPath, {
             headers: {
-                Authorization: "Bearer " + token
+                Authorization: "Bearer " + accessJwt
             }
         })
             .then(response => {
-                // setImage(response.data);
-                console.log(response.data);
                 if (image === "") {
                     setImage("http://178.20.41.50/images/defaultuser.jpeg");
                 } else {
@@ -39,7 +35,7 @@ function User() {
     useEffect(() => {
         axios.get(API_URL + `/user/${params.id}`, {
             headers: {
-                Authorization: "Bearer " + token
+                Authorization: "Bearer " + accessJwt
             }
         })
             .then(response => {
@@ -52,7 +48,7 @@ function User() {
         const userId = params.id;
         axios.get(API_URL + `/items/user/${userId}`, {
             headers: {
-                Authorization: "Bearer " + token
+                Authorization: "Bearer " + accessJwt
             }
         })
             .then(response => {

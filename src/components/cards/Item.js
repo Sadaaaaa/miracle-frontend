@@ -10,15 +10,12 @@ function Item() {
     const [item, setItem] = useState([]);
     const [pictures, setPictures] = useState([]);
     const params = useParams();
-    const token = localStorage.getItem('JWT');
-
-    console.log(token)
-    console.log("params: " + params.id);
+    const accessJwt = localStorage.getItem('accessToken');
 
     useEffect(() => {
         axios.get(API_URL + "/image/item/" + params.id, {
             headers: {
-                Authorization: "Bearer " + token
+                Authorization: "Bearer " + accessJwt
             }
         })
             .then(response => {
@@ -30,7 +27,7 @@ function Item() {
     useEffect(() => {
         axios.get(API_URL + `/item/${params.id}`, {
             headers: {
-                Authorization: "Bearer " + token
+                Authorization: "Bearer " + accessJwt
             }
         })
             .then(response => {

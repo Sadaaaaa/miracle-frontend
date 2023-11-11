@@ -60,7 +60,8 @@ function App() {
     removeCookie("user");
     handleDropMenu(e);
 
-    localStorage.removeItem('JWT');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
 
     setAuth(false);
     navigate("/");

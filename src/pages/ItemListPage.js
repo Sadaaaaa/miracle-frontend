@@ -9,9 +9,6 @@ function ItemListPage() {
     const search = useSelector(state => state.item.input);
     const [items, setItems] = useState([]);
 
-    // const JWT = localStorage.getItem("token");
-
-
     useEffect(() => {
         if (search === 0) {
             axios.get(API_URL + "/items/all?from=" + 0 + "&size=" + 10, 
