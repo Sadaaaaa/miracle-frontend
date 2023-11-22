@@ -8,8 +8,8 @@
 
 FROM --platform=linux/amd64 node:alpine
 WORKDIR /app/front
-COPY package.json /app/
+COPY package.json /app
 RUN npm install
-COPY . .
+COPY . /app
 EXPOSE 3000
 CMD ["npm", "start"]
