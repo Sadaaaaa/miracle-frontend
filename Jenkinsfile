@@ -85,27 +85,21 @@ pipeline {
     environment {
         REMOTE_SERVER_IP = '192.168.88.82'
         REMOTE_SERVER_USERNAME = 'serg'
-        REMOTE_DOCKER_COMPOSE_FILE = '/home/serg/docker-compose.yml'
+        REMOTE_SERVER_SSH_CREDENTIALS = 'your-ssh-credentials-id'  // Идентификатор учетных данных для SSH-ключа
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Build and Deploy Docker Image on Remote Server') {
+        stage('Build and Deploy on Remote Server') {
             steps {
                 script {
-                    // Build and tag the Docker image on the remote server
-                    sshagent(['your-ssh-credentials-id']) {
-                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'cd /home/serg && docker build -t miracle-frontend .'"
+                    // Клонирование репозитория на удаленном сервере
+                    sshagent([REMOTE_SERVER_SSH_CREDENTIALS]) {
+                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg'"
                     }
 
-                    // Deploy the Docker container using Docker Compose on the remote server
-                    sshagent(['your-ssh-credentials-id']) {
-                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'cd /home/serg && docker-compose -f ${REMOTE_DOCKER_COMPOSE_FILE} up -d frontend'"
+                    // Сборка и развертывание Docker на удаленном сервере
+                    sshagent([REMOTE_SERVER_SSH_CREDENTIALS]) {
+                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'cd /home/serg/miracle-frontend && docker-compose up -d'"
                     }
                 }
             }
