@@ -48,7 +48,7 @@ pipeline {
                 script {
                     // Transfer the archive to the remote server
                     sshagent(['your-ssh-credentials-id']) {
-                        sh "scp miracle-frontend.tar ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP}:/home/serg"
+                        sh "scp miracle-frontend.tar Dockerfile ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP}:/home/serg"
                     }
                 }
             }
