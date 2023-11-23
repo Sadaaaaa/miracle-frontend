@@ -94,7 +94,7 @@ pipeline {
                 script {
                     // Клонирование репозитория на удаленном сервере
                     sshagent([REMOTE_SERVER_SSH_CREDENTIALS]) {
-                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'git clone -f https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend'"
+                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'rm -rf /home/serg/frontend && git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend'"
                     }
 
                     // Сборка и развертывание Docker на удаленном сервере
