@@ -113,7 +113,7 @@ function App() {
       <div className="wrap_foot">
         <footer className='footer_app'>
           <a target="_blank" className="tg__link" href="https://t.me/sadopwnz">@sadopwnz</a>
-          <span className="version">v.0.0.3</span>
+          <span className="version">v.0.0.4</span>
         </footer>
       </div>
 
