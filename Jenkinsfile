@@ -114,6 +114,7 @@ pipeline {
                         }
                     }
                 }
+            }
 
             stage('Start docker-compose service') {
                 steps {
