@@ -13,13 +13,13 @@ pipeline {
             steps {
                 script {
                     // Проверка наличия папки проекта
-                    def projectDirExists = sh(script: "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'test -d /home/serg/frontend && echo true || echo false'", returnStatus: true)
-
+//                     def projectDirExists = sh(script: "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'test -d /home/serg/frontend && echo true || echo false'", returnStatus: true)
+                    def isNotEmpty = sh(script: "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'ls -A /home/serg/frontend 2>/dev/null && echo true || echo false'", returnStatus: true)
                     // Если папка проекта существует, выполнить git pull, иначе git clone
-                    if (projectDirExists == 'true') {
-                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend'"
-                    } else {
+                    if (isNotEmpty) {
                         sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'cd /home/serg/frontend && git pull'"
+                    } else {
+                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend'"
                     }
                 }
             }
