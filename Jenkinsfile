@@ -17,9 +17,9 @@ pipeline {
 
                     // Если папка проекта существует, выполнить git pull, иначе git clone
                     if (projectDirExists == 'true') {
-                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'cd /home/serg/frontend && git pull'"
-                    } else {
                         sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend'"
+                    } else {
+                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'cd /home/serg/frontend && git pull'"
                     }
                 }
             }
