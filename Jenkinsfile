@@ -13,7 +13,7 @@ pipeline {
         stage('Get project from the Github') {
             steps {
                 script {
-                    sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'rm -rf /home/serg/frontend' && git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend"
+                    sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'rm -rf /home/serg/frontend && git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend'"
                 }
             }
         }
