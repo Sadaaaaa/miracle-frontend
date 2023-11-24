@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Проверка наличия папки проекта
-                    def projectDirExists = sh(script: "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'test -d /home/serg/frontend && echo true || echo false'", returnStatus: true).trim()
+                    def projectDirExists = sh(script: "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'test -d /home/serg/frontend && echo true || echo false'", returnStatus: true)
 
                     // Если папка проекта существует, выполнить git pull, иначе git clone
                     if (projectDirExists == 'true') {
