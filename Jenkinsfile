@@ -88,21 +88,42 @@ pipeline {
         REMOTE_SERVER_SSH_CREDENTIALS = 'your-ssh-credentials-id'  // Идентификатор учетных данных для SSH-ключа
     }
 
-    stages {
-        stage('Build and Deploy on Remote Server') {
-            steps {
-                script {
-                    // Клонирование репозитория на удаленном сервере
-                    sshagent([REMOTE_SERVER_SSH_CREDENTIALS]) {
-                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'rm -rf /home/serg/frontend && git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend'"
-                    }
+        stages {
+            stage('Get project from the Github') {
+                steps {
+                    script {
+                        // Проверка наличия папки проекта
+                        def projectDirExists = sh(script: "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'test -d /home/serg/frontend && echo true || echo false'", returnStatus: true).trim()
 
-                    // Сборка и развертывание Docker на удаленном сервере
-                    sshagent([REMOTE_SERVER_SSH_CREDENTIALS]) {
-                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'docker-compose up -d'"
+                        // Если папка проекта существует, выполнить git pull, иначе git clone
+                        if (projectDirExists == 'true') {
+                            sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'cd /home/serg/frontend && git pull'"
+                        } else {
+                            sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'git clone https://github.com/Sadaaaaa/miracle-frontend.git /home/serg/frontend'"
+                        }
                     }
                 }
             }
+
+            stage('Build the new docker image') {
+                steps {
+                    script {
+                    sshagent([REMOTE_SERVER_SSH_CREDENTIALS]) {
+                        // Сборка Docker-образа
+                        sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'docker-compose stop && cd /home/serg/frontend && docker build -t miracle-frontend:latest .'"
+                        }
+                    }
+                }
+
+            stage('Start docker-compose service') {
+                steps {
+                    script {
+                        // Сборка и развертывание Docker на удаленном сервере
+                        sshagent([REMOTE_SERVER_SSH_CREDENTIALS]) {
+                            sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'docker-compose stop && docker-compose up --build -d'"
+                        }
+                    }
+                }
         }
     }
 
