@@ -99,7 +99,6 @@ pipeline {
 
                     // Сборка и развертывание Docker на удаленном сервере
                     sshagent([REMOTE_SERVER_SSH_CREDENTIALS]) {
-//                         sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'cd /home/serg/frontend && /home/serg/docker-compose up -d'"
                         sh "ssh ${REMOTE_SERVER_USERNAME}@${REMOTE_SERVER_IP} 'docker-compose up -d'"
                     }
                 }
